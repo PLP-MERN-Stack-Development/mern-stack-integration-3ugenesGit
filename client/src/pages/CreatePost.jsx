@@ -14,7 +14,7 @@ function CreatePost() {
     const fetchCategories = async () => {
       try {
         const response = await getCategories();
-        setCategories(response.data);
+        setCategories(response.data.data); // Adjusted to access the nested data array
       } catch (err) {
         console.error('Error fetching categories:', err);
       }
@@ -35,30 +35,36 @@ function CreatePost() {
   };
 
   return (
-    <div>
-      <h1>Create New Post</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
+    <>
+      <h1 className="text-4xl font-bold text-slate-800 mb-8 text-center">Create New Post</h1>
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label>Title:</label>
+          <label htmlFor="title" className="block text-slate-600 text-sm font-bold mb-2">Title:</label>
           <input
             type="text"
+            id="title"
+            className="border border-slate-300 rounded w-full py-2 px-4 text-slate-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
           />
         </div>
         <div>
-          <label>Content:</label>
+          <label htmlFor="content" className="block text-slate-600 text-sm font-bold mb-2">Content:</label>
           <textarea
+            id="content"
+            className="border border-slate-300 rounded w-full py-2 px-4 text-slate-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow h-40"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
           ></textarea>
         </div>
         <div>
-          <label>Category:</label>
+          <label htmlFor="category" className="block text-slate-600 text-sm font-bold mb-2">Category:</label>
           <select
+            id="category"
+            className="border border-slate-300 rounded w-full py-2 px-4 text-slate-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             required
@@ -71,9 +77,14 @@ function CreatePost() {
             ))}
           </select>
         </div>
-        <button type="submit">Create Post</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+        >
+          Create Post
+        </button>
       </form>
-    </div>
+    </>
   );
 }
 

@@ -1,6 +1,5 @@
-// Post.js - Mongoose model for blog posts
-
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const PostSchema = new mongoose.Schema(
   {
@@ -68,15 +67,9 @@ const PostSchema = new mongoose.Schema(
 
 // Create slug from title before saving
 PostSchema.pre('save', function (next) {
-  if (!this.isModified('title')) {
-    return next();
+  if (this.isModified('title')) {
+    this.slug = slugify(this.title, { lower: true, strict: true });
   }
-  
-  this.slug = this.title
-    .toLowerCase()
-    .replace(/[^\w ]+/g, '')
-    .replace(/ +/g, '-');
-    
   next();
 });
 

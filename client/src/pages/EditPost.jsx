@@ -41,33 +41,39 @@ function EditPost() {
     }
   };
 
-  if (loading) return <div>Loading post for editing...</div>;
-  if (error) return <div style={{ color: 'red' }}>Error: {error}</div>;
+  if (loading) return <div className="text-center text-gray-600">Loading post for editing...</div>;
+  if (error) return <div className="text-red-500 text-center mb-4">Error: {error}</div>;
 
   return (
-    <div>
-      <h1>Edit Post</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="p-4 max-w-lg mx-auto bg-white shadow-md rounded-lg">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Post</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label>Title:</label>
+          <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">Title:</label>
           <input
             type="text"
+            id="title"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
           />
         </div>
         <div>
-          <label>Content:</label>
+          <label htmlFor="content" className="block text-gray-700 text-sm font-bold mb-2">Content:</label>
           <textarea
+            id="content"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
           ></textarea>
         </div>
         <div>
-          <label>Category:</label>
+          <label htmlFor="category" className="block text-gray-700 text-sm font-bold mb-2">Category:</label>
           <select
+            id="category"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             required
@@ -80,7 +86,12 @@ function EditPost() {
             ))}
           </select>
         </div>
-        <button type="submit">Update Post</button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+        >
+          Update Post
+        </button>
       </form>
     </div>
   );
