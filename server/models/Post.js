@@ -62,12 +62,16 @@ const PostSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { 
+    timestamps: true,
+    collection: 'posts' // Explicitly set collection name
+  }
 );
 
 // Create slug from title before saving
 PostSchema.pre('save', function (next) {
-  if (this.isModified('title')) {
+  // Generate slug if title is modified or if slug doesn't exist (new post)
+  if (this.isModified('title') || !this.slug) {
     this.slug = slugify(this.title, { lower: true, strict: true });
   }
   next();

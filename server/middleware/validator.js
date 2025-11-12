@@ -4,7 +4,7 @@ const validatePost = [
   body('title').not().isEmpty().withMessage('Title is required'),
   body('content').not().isEmpty().withMessage('Content is required'),
   body('category').not().isEmpty().withMessage('Category is required'),
-  body('author').not().isEmpty().withMessage('Author is required'),
+  // Author is automatically set from authenticated user, no need to validate
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

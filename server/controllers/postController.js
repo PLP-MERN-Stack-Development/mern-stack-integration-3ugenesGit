@@ -39,12 +39,31 @@ exports.getPost = async (req, res, next) => {
 // @access  Private
 exports.createPost = async (req, res, next) => {
   try {
+    // Add user to req.body from authenticated user
+    req.body.author = req.user._id;
+    
+    // Log database connection info
+    const dbName = Post.db.name;
+    const collectionName = Post.collection.name;
+    console.log(`Database: ${dbName}, Collection: ${collectionName}`);
+    console.log('Creating post with data:', JSON.stringify(req.body, null, 2));
+    
     const post = await Post.create(req.body);
+    console.log('Post created successfully:', post._id);
+    console.log('Post saved to collection:', Post.collection.name);
+    
     res.status(201).json({
       success: true,
       data: post,
     });
   } catch (err) {
+    console.error('Error creating post:', err);
+    console.error('Error details:', {
+      name: err.name,
+      message: err.message,
+      code: err.code,
+      errors: err.errors
+    });
     next(err);
   }
 };

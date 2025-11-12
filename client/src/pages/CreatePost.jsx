@@ -14,7 +14,7 @@ function CreatePost() {
     const fetchCategories = async () => {
       try {
         const response = await getCategories();
-        setCategories(response.data.data); // Adjusted to access the nested data array
+        setCategories(response.data);
       } catch (err) {
         console.error('Error fetching categories:', err);
       }
@@ -25,9 +25,8 @@ function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Placeholder for author ID - will be replaced with actual user ID from auth context
-      const authorId = '60d5ec49f8c7b00015f8e3b1'; // Example ID, replace with dynamic value
-      await createPost({ title, content, category, author: authorId });
+      // Author ID is automatically set from authenticated user on the backend
+      await createPost({ title, content, category });
       navigate('/posts');
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to create post');
