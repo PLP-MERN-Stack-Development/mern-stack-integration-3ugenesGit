@@ -1,78 +1,131 @@
-# MERN Stack Integration Assignment
+# MERN Stack Integration Project
 
-This assignment focuses on building a full-stack MERN (MongoDB, Express.js, React.js, Node.js) application that demonstrates seamless integration between front-end and back-end components.
+This project is a full-stack application built using the MERN (MongoDB, Express.js, React, Node.js) stack. It features user authentication, post management, and category management.
 
-## Assignment Overview
+## Features
 
-You will build a blog application with the following features:
-1. RESTful API with Express.js and MongoDB
-2. React front-end with component architecture
-3. Full CRUD functionality for blog posts
-4. User authentication and authorization
-5. Advanced features like image uploads and comments
+-   User Registration and Login (JWT Authentication)
+-   Create, Read, Update, Delete (CRUD) operations for Blog Posts
+-   Create and List Categories for Posts
 
-## Project Structure
+## Technologies Used
+
+**Frontend (Client):**
+-   React.js
+-   Vite (for development and build)
+-   Axios (for API requests)
+-   React Router DOM (for navigation)
+-   Tailwind CSS (for styling)
+
+**Backend (Server):**
+-   Node.js
+-   Express.js (for building REST APIs)
+-   MongoDB (NoSQL database)
+-   Mongoose (ODM for MongoDB)
+-   bcryptjs (for password hashing)
+-   jsonwebtoken (for JWT authentication)
+-   dotenv (for environment variables)
+-   nodemon (for automatic server restarts during development)
+-   express-validator (for request body validation)
+
+## Setup and Installation
+
+Follow these steps to set up and run the project locally.
+
+### Prerequisites
+
+-   Node.js (LTS version recommended)
+-   npm (Node Package Manager)
+-   MongoDB (running locally or accessible via a cloud service like MongoDB Atlas)
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository_url>
+cd mern-stack-integration-3ugenesGit
+```
+
+### 2. Backend Setup
+
+Navigate to the `server` directory, install dependencies, and create a `.env` file.
+
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file in the `server` directory with the following content:
 
 ```
-mern-blog/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
-│   │   ├── components/     # Reusable components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── services/       # API services
-│   │   ├── context/        # React context providers
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Express.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Route controllers
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── middleware/         # Custom middleware
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
+PORT=5000
+MONGO_URI=YOUR_MONGODB_CONNECTION_STRING
+JWT_SECRET=YOUR_JWT_SECRET_KEY
+JWT_EXPIRE=30d
+JWT_COOKIE_EXPIRE=30
 ```
 
-## Getting Started
+-   Replace `YOUR_MONGODB_CONNECTION_STRING` with your MongoDB connection string (e.g., `mongodb://localhost:27017/mern_blog` or your MongoDB Atlas URI).
+-   Replace `YOUR_JWT_SECRET_KEY` with a strong, random string for JWT signing.
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week4-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+### 3. Frontend Setup
 
-## Files Included
+Navigate to the `client` directory, install dependencies, and create a `.env` file.
 
-- `Week4-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Configuration files
-  - Sample models and components
+```bash
+cd ../client
+npm install
+```
 
-## Requirements
+Create a `.env` file in the `client` directory with the following content:
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git
+```
+VITE_API_BASE_URL=http://localhost:5000
+```
 
-## Submission
+### 4. Running the Application
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+#### Start the Backend Server
 
-1. Complete both the client and server portions of the application
-2. Implement all required API endpoints
-3. Create the necessary React components and hooks
-4. Document your API and setup process in the README.md
-5. Include screenshots of your working application
+In the `server` directory, run:
 
-## Resources
+```bash
+cd ../server
+npm run dev
+```
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [Mongoose Documentation](https://mongoosejs.com/docs/) 
+The server will start on `http://localhost:5000`.
+
+#### Start the Frontend Development Server
+
+In the `client` directory, run:
+
+```bash
+cd ../client
+npm run dev
+```
+
+The client application will open in your browser, usually at `http://localhost:5173`.
+
+## Usage
+
+1.  **Register a new user** through the client application.
+2.  **Log in** with your registered credentials.
+3.  Once logged in, you can **create new categories** and **manage posts**.
+
+## Seeding the Database (Optional)
+
+The backend includes a seeding script to populate the database with dummy data.
+
+To seed the database:
+
+```bash
+cd server
+npm run seed
+```
+
+To destroy seeded data:
+
+```bash
+cd server
+npm run seed:destroy
+```
